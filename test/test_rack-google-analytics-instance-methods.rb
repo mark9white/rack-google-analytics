@@ -9,7 +9,6 @@ require 'active_support/core_ext/hash/slice'
 require "action_controller"
 require File.expand_path('../../lib/google-analytics', __FILE__)
 
-
 class TestRackGoogleAnalyticsInstanceMethods < Test::Unit::TestCase
 
   include Rack::Test::Methods
@@ -21,6 +20,8 @@ class TestRackGoogleAnalyticsInstanceMethods < Test::Unit::TestCase
       render :inline => "<html><head><title>Title</title></head><body>Hello World</body></html>"
     end
   end
+
+
 
   def controller
     MockController.action(:index)

@@ -44,6 +44,14 @@ class TestRackGoogleAnalytics < Test::Unit::TestCase
       end
     end
 
+    context "debug" do
+      setup { mock_app :async => true, :debug => true, :tracker => 'get'}
+      should "add top_level domain script" do
+        get "/"
+        assert_match %r{/u/ga_debug.js'}, last_response.body
+      end
+    end
+
   end
 
   context "Syncronous" do
@@ -53,6 +61,7 @@ class TestRackGoogleAnalytics < Test::Unit::TestCase
       assert_match %r{_gat._getTracker}, last_response.body
       assert_match %r{</script></body>}, last_response.body
       assert_match %r{\"whatthe\"}, last_response.body
+      assert_match %r{ga.js'}, last_response.body
     end
   end
 end
